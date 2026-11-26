@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8fafc" />
+    <meta name="description" content="공강 시간, 지금 갈 수 있는 캠퍼스 공간을 빠르게 찾아보세요." />
+    <title>공강맞춤 — 캠퍼스 공간 큐레이션</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="공강맞춤 홈">
+          <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V8.5L12 4l8 4.5V19M8 19v-6h8v6M3 19h18M9 9.5h.01M15 9.5h.01"/></svg></span>
+          <span>공강<span class="brand-accent">맞춤</span></span>
+        </a>
+        <div class="topbar-right">
+          <span class="live-pill"><i></i> 캠퍼스 실시간</span>
+          <button class="icon-btn avatar" aria-label="내 프로필">민</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="sparkle">✦</span> BETWEEN CLASS, BETTER</div>
+            <h1>공강을 더 잘 보내는<br /><span>가장 가까운 방법</span></h1>
+            <p>지금 앉을 수 있는 캠퍼스 스팟을 한눈에 찾아보세요.</p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+            <div class="art-building"><span></span><span></span><span></span><span></span><b></b></div>
+            <div class="art-pin"><i>⌖</i></div><div class="art-cloud cloud-one"></div><div class="art-cloud cloud-two"></div>
+          </div>
+        </section>
+
+        <section class="location-row" aria-label="현재 위치">
+          <div class="location-main"><span class="location-icon">⌖</span><div><small>내 주변 공간 찾기</small><button id="locationButton" class="location-select">제1공학관 인근 <span>⌄</span></button></div></div>
+          <div class="location-meta"><span id="distanceLabel">도보 5분 거리</span><button class="gps-button" id="gpsButton"><span>◎</span> 내 위치</button></div>
+        </section>
+
+        <section class="filter-section">
+          <div class="section-heading filter-heading"><div><h2>어떤 공간이 필요하세요?</h2><p>조건을 골라 빠르게 찾아보세요</p></div><button class="text-button" id="resetFilters">초기화</button></div>
+          <div class="filters" id="filters" aria-label="공간 조건 필터">
+            <button class="filter-chip" data-filter="OUTLET"><span>ϟ</span> 콘센트</button>
+            <button class="filter-chip" data-filter="LAPTOP"><span>▱</span> 노트북 작업</button>
+            <button class="filter-chip" data-filter="WALK_5MIN"><span>↗</span> 도보 5분 이내</button>
+            <button class="filter-chip" data-filter="QUIET"><span>◖</span> 조용한 개인 학습</button>
+          </div>
+        </section>
+
+        <section class="content-grid">
+          <div class="results-column">
+            <div class="section-heading results-heading"><div><div class="title-line"><h2>지금 갈 수 있는 곳</h2><span class="result-count" id="resultCount">15</span></div><p id="resultSubtitle">가까운 순으로 모아봤어요</p></div><button class="sort-button" id="sortButton">⌁ <span>가까운 순</span>⌄</button></div>
+            <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="공간 이름으로 검색" maxlength="20" /><kbd>⌘ K</kbd></label>
+            <div class="active-filter-note" id="filterNote" hidden></div>
+            <div class="space-list" id="spaceList"></div>
+            <div class="empty-state" id="emptyState" hidden><div>⌕</div><strong>조건에 맞는 공간이 없어요</strong><p>필터를 일부 해제하거나 다른 검색어를 입력해 보세요.</p><button id="emptyReset">필터 초기화</button></div>
+            <button class="load-more" id="loadMore">공간 더 둘러보기 <span>↓</span></button>
+          </div>
+
+          <aside class="side-column">
+            <div class="campus-card">
+              <div class="side-card-head"><div><span class="mini-label">CAMPUS MAP</span><h3>캠퍼스 한눈에 보기</h3></div><button class="map-expand" aria-label="지도 크게 보기">↗</button></div>
+              <div class="map-illustration" id="miniMap">
+                <div class="map-road road-h"></div><div class="map-road road-v"></div><div class="map-path path-one"></div><div class="map-path path-two"></div>
+                <div class="map-building map-b1"><i></i><i></i><i></i><i></i><label>공학관</label></div><div class="map-building map-b2"><i></i><i></i><i></i><i></i><label>중앙도서관</label></div><div class="map-building map-b3"><i></i><i></i><i></i><i></i><label>학생회관</label></div><div class="map-building map-b4"><i></i><i></i><i></i><i></i><label>제2공학관</label></div>
+                <div class="map-user"><span></span></div><div class="map-pin pin-a">2</div><div class="map-pin pin-b">5</div>
+                <div class="map-legend"><span><i class="legend-dot green"></i>여유</span><span><i class="legend-dot amber"></i>보통</span><span><i class="legend-dot red"></i>혼잡</span></div>
+              </div>
+              <div class="map-foot"><span><i class="pulse-dot"></i> 현재 위치 기준</span><button id="mapRefresh">지도 새로고침 ↻</button></div>
+            </div>
+
+            <div class="tip-card"><div class="tip-icon">✦</div><div><span class="mini-label">QUICK TIP</span><h3>빈 강의실도 살펴보세요</h3><p>다음 수업 전까지 여유롭게<br />머물 수 있는 공간이 있어요.</p><button id="classroomFilter">빈 강의실 보기 <span>→</span></button></div><div class="tip-spark">✧</div></div>
+
+            <div class="fresh-card"><div class="fresh-icon">↻</div><div><strong>정보는 계속 업데이트돼요</strong><p>마지막 업데이트 <span id="lastUpdated">방금 전</span></p></div><button id="refreshButton" aria-label="새로고침">↻</button></div>
+          </aside>
+        </section>
+      </main>
+      <footer><span>© 2026 공강맞춤</span><span>함께 만드는 더 나은 공강</span></footer>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <section class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="closeModal" aria-label="닫기">×</button><div id="modalContent"></div></section>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
